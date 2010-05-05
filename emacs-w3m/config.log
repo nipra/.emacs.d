@@ -1,0 +1,23 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:543: checking whether make sets ${MAKE}
+configure:600: checking for a BSD compatible install
+configure:655: checking for makeinfo
+configure:685: checking for texi2dvi
+configure:715: checking for ptex
+configure:745: checking for jbibtex
+configure:775: checking for dvipdfmx
+configure:805: checking for texi2pdf
+configure:837: checking for egrep
+configure:1041: checking for emacs
+configure:1093: checking what a flavor does /usr/bin/emacs have
+/usr/bin/emacs -q -no-site-file --no-unibyte -batch -eval '(let ((x (if (featurep (quote xemacs))	(if (and	     (condition-case nil		 (progn		   (unless (or itimer-process itimer-timer)		     (itimer-driver-start))		   (let* ((inhibit-quit t)			  (ctime (current-time))			  (itimer-timer-last-wakeup			   (prog1			       ctime			     (setcar ctime (1- (car ctime)))))			  (itimer-list nil)			  (itimer (start-itimer "*testing*"						(function ignore) 5)))		     (sleep-for 0.1)		     (prog1			 (> (itimer-value itimer) 0)		       (delete-itimer itimer))))	       (error nil))	     (string-match	      (concat (vector 94 92 40 63 58 32 43 92 41 42 92 91 92 93))	      (concat (vector 32 91 93)))	     (or (not (executable-find "cat"))		 (with-temp-buffer		   (insert "foo")		   (backward-char)		   (call-process-region (1- (point)) (point) "cat" t t)		   (goto-char (point-min))		   (looking-at "foo"))))	    "XEmacs"	  (let ((v (emacs-version)))	    (if (string-match (char-to-string 41) v)		(substring v 0 (match-end 0))	      "Old XEmacs")))      (concat "Emacs "	      (mapconcat (function identity)			 (nreverse			  (cdr (nreverse				(split-string emacs-version					      (concat (vector 92 46))))))			 "."))))) (write-region (if (stringp x) (princ x) (prin1-to-string x)) nil "./conftest-1794" nil 5))'
+Emacs 22.2=> Emacs 22.2
+configure:1180: checking prefix for /usr/bin/emacs
+/usr/bin/emacs -q -no-site-file --no-unibyte -batch -eval '(let ((x (expand-file-name ".." invocation-directory))) (write-region (if (stringp x) (princ x) (prin1-to-string x)) nil "./conftest-1794" nil 5))'
+/usr=> /usr
+configure:1217: checking where lisp files should go
+configure:1394: checking where icon files should go
+/usr/bin/emacs -q -no-site-file --no-unibyte -batch -eval '(let ((x (let ((prefix "/usr")	      (default (expand-file-name "images/w3m" data-directory)))	  (if (and prefix		   (progn		     (setq prefix (file-name-as-directory prefix))		     (eq 0 (string-match (regexp-quote prefix) default))))	      (replace-match "$(prefix)/" nil nil default)	    default)))) (write-region (if (stringp x) (princ x) (prin1-to-string x)) nil "./conftest-1794" nil 5))'
+$(prefix)/share/emacs/22.2/etc/images/w3m=> $(prefix)/share/emacs/22.2/etc/images/w3m
