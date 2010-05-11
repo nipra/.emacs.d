@@ -1,0 +1,3 @@
+I start emacs for Clojure development using:
+
+/usr/bin/emacs-snapshot-gtk -l ~/.emacs.d/init-clj.el
