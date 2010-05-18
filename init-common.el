@@ -233,8 +233,8 @@
 
 ;;; anything-delicious
 (require 'anything-delicious)
-(setq anything-delicious-user "nipra")
-(setq anything-delicious-password "asdflisp1")
+(setq anything-delicious-user nil)
+(setq anything-delicious-password nil)
 
 ;; http://web.archive.org/web/20061025212623/http://www.cs.utexas.edu/users/hllu/EmacsSmoothScrolling.html
 (setq truncate-lines t)
