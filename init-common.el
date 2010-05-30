@@ -34,7 +34,7 @@
 (setq query-replace-highlight t)
 (setq search-highlight t)
 (setq mouse-avoidance-mode 'banish)
-(set-frame-font "DejaVu Sans Mono-8")
+(set-frame-font "DejaVu Sans Mono-10")
 
 
 ;; X11 Copy & Paste to/from Emacs
@@ -488,12 +488,12 @@
 
 
 ;; http://www.emacswiki.org/emacs-en/ShellPop
-(require 'shell-pop)
-(shell-pop-set-internal-mode "ansi-term")
-(shell-pop-set-internal-mode-shell "/bin/bash")
-(shell-pop-set-window-height 100) ;the number for the percentage of the selected window. if 100, shell-pop use the whole of selected window, not spliting.
-(shell-pop-set-window-position "bottom") ;shell-pop-up position. You can choose "top" or "bottom". 
-(global-set-key [f8] 'shell-pop)
+;; (require 'shell-pop)
+;; (shell-pop-set-internal-mode "ansi-term")
+;; (shell-pop-set-internal-mode-shell "/bin/bash")
+;; (shell-pop-set-window-height 100) ;the number for the percentage of the selected window. if 100, shell-pop use the whole of selected window, not spliting.
+;; (shell-pop-set-window-position "bottom") ;shell-pop-up position. You can choose "top" or "bottom". 
+;; (global-set-key [f8] 'shell-pop)
 
 
 ;;; http://www.emacswiki.org/emacs/TwitteringMode
@@ -748,13 +748,13 @@
   (split-window-vertically)
   (other-window 1))
 
-(global-set-key (kbd "C-c C-t") 'multi-term)
-(global-set-key (kbd "C-c C-n") 'multi-term-next)
-(global-set-key (kbd "C-c C-p") 'multi-term-prev)
-(global-set-key (kbd "<f1>") 'multi-term-dedicated-open*)
-(global-set-key (kbd "<f2>") 'multi-term-dedicated-close*)
-(global-set-key (kbd "<f7>") 'multi-term-dedicated-open**)
-(global-set-key (kbd "<f9>") 'multi-term-dedicated-close**)
+;; (global-set-key (kbd "C-c C-t") 'multi-term)
+;; (global-set-key (kbd "C-c C-n") 'multi-term-next)
+;; (global-set-key (kbd "C-c C-p") 'multi-term-prev)
+;; (global-set-key (kbd "<f1>") 'multi-term-dedicated-open*)
+;; (global-set-key (kbd "<f2>") 'multi-term-dedicated-close*)
+;; (global-set-key (kbd "<f7>") 'multi-term-dedicated-open**)
+;; (global-set-key (kbd "<f9>") 'multi-term-dedicated-close**)
 
 
 (provide 'init-common)
