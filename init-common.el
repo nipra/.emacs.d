@@ -517,8 +517,8 @@
 
 (setq twittering-status-format (concat "%i %s:  %@:\n%FILL{  %T } \n\n⋙ from %f%L%r%R\n" "-----------------------------------"))
 (setq twittering-convert-fix-size 30)
-(add-hook 'twittering-mode-hook (lambda ()
-				  (setq browse-url-browser-function 'w3m-browse-url-new-tab)))
+;; (add-hook 'twittering-mode-hook (lambda ()
+;; 				  (setq browse-url-browser-function 'w3m-browse-url-new-tab)))
 (setq twittering-retweet-format "RT @%s: %t")
 
 
