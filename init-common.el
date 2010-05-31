@@ -692,9 +692,10 @@
 ;;; MultiTerm
 ;;; http://www.emacswiki.org/emacs/MultiTerm
 
-(require 'multi-term)
-(setq multi-term-program "/bin/bash")
+;; (require 'multi-term)
+;; (setq multi-term-program "/bin/bash")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (defun multi-term-dedicated-toggle*
 ;;   (interactive)
 ;;   (multi-term-dedicated-toggle)
@@ -723,30 +724,31 @@
 ;;          (if (string-match "^.+//[0-9]+$" (buffer-name b))
 ;; 	     (first (last (split-string (buffer-name b) "[/]")))
 ;; 	   (cadr (split-string (buffer-name b)  "[<>]"))))))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun multi-term-dedicated-open* ()
-  (interactive)
-  (multi-term-dedicated-open)
-  (multi-term-dedicated-select))
+;; (defun multi-term-dedicated-open* ()
+;;   (interactive)
+;;   (multi-term-dedicated-open)
+;;   (multi-term-dedicated-select))
 
-(defun multi-term-dedicated-open** ()
-  (interactive)
-  (other-window 1)
-  (delete-window)
-  (other-window -1)
-  (multi-term-dedicated-open)
-  (multi-term-dedicated-select))
+;; (defun multi-term-dedicated-open** ()
+;;   (interactive)
+;;   (other-window 1)
+;;   (delete-window)
+;;   (other-window -1)
+;;   (multi-term-dedicated-open)
+;;   (multi-term-dedicated-select))
 
-(defun multi-term-dedicated-close* ()
-  (interactive)
-  (multi-term-dedicated-close)
-  (other-window -1))
+;; (defun multi-term-dedicated-close* ()
+;;   (interactive)
+;;   (multi-term-dedicated-close)
+;;   (other-window -1))
 
-(defun multi-term-dedicated-close** ()
-  (interactive)
-  (multi-term-dedicated-close*)
-  (split-window-vertically)
-  (other-window 1))
+;; (defun multi-term-dedicated-close** ()
+;;   (interactive)
+;;   (multi-term-dedicated-close*)
+;;   (split-window-vertically)
+;;   (other-window 1))
 
 ;; (global-set-key (kbd "C-c C-t") 'multi-term)
 ;; (global-set-key (kbd "C-c C-n") 'multi-term-next)
