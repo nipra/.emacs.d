@@ -1,7 +1,8 @@
 (setq additional-paths-common '("/home/nipra/.emacs.d"
 				"/home/nipra/.emacs.d/magit"
 				"/home/nipra/.emacs.d/emacs-w3m"
-				"/home/nipra/.emacs.d/twittering-mode"))
+				"/home/nipra/.emacs.d/twittering-mode"
+				"/home/nipra/.emacs.d/color-themes"))
 
 (setq load-path (append additional-paths-common load-path))
 
@@ -78,9 +79,17 @@
 
 ;; ;; ;; COLOR-THEME
 (require 'color-theme)
+(color-theme-hober)
+
 (require 'zenburn)
 ;; (zenburn)
-(color-theme-hober)
+
+(require 'color-theme-billc)
+;; (color-theme-billc)
+
+(require 'gentooish)
+(color-theme-gentooish)
+
 
 ;; ;; ;; -----------------
 ;; ;; ;; Insert time stamp
