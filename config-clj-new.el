@@ -1,8 +1,8 @@
 (setq additional-paths-clj '("/home/nipra/.emacs.d"
-			     "/home/nipra/.emacs.d/clj/swank-clojure"
-			     "/home/nipra/.emacs.d/clj/slime"
-			     "/home/nipra/.emacs.d/clj/slime/contrib"
-			     "/home/nipra/.emacs.d/clj/clojure-mode-1.5"))
+			     "/home/nipra/.emacs.d/clj-new/swank-clojure"
+			     "/home/nipra/.emacs.d/clj-new/slime"
+			     "/home/nipra/.emacs.d/clj-new/slime/contrib"
+			     "/home/nipra/.emacs.d/clj-new/clojure-mode"))
 
 (setq load-path (append additional-paths-clj load-path))
 
@@ -10,13 +10,12 @@
 (require 'slime-autoloads)
 (slime-setup '(slime-fancy
                slime-repl
-               slime-asdf
-	       slime-fuzzy))
+               slime-asdf))
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (slime-mode t)))
 
 ;; Clojure
-(require 'swank-clojure-autoload)
+;; (require 'swank-clojure-autoload)
 (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 
 ;; ;; ;; PAREDIT-MODE
@@ -24,13 +23,6 @@
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code."
   t)
-
-(add-hook 'slime-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'lisp-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'slime-connected-hook (lambda () (paredit-mode +1)))
-;; (setq slime-complete-symbol*-fancy t)
-(setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; http://groups.google.com/group/clojure/msg/b5a4f5b3b7e63d35
@@ -202,9 +194,14 @@
           (define-key paredit-mode-map (kbd "C-c v") 'paredit-splice-sexp-killing-forward)))
 
 
+(add-hook 'slime-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'lisp-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'slime-connected-hook (lambda () (paredit-mode +1)))
+;; (setq slime-complete-symbol*-fancy t)
+(setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
 
 
 
 
-
-(provide 'config-clj)
+(provide 'config-clj-new)

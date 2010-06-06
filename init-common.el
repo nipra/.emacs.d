@@ -88,7 +88,7 @@
 ;; (color-theme-billc)
 
 (require 'gentooish)
-(color-theme-gentooish)
+;; (color-theme-gentooish)
 
 
 ;; ;; ;; -----------------
