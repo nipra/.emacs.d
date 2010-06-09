@@ -43,6 +43,11 @@
 ;; 'y' for 'yes', 'n' for 'no'
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;;; If the value of the variable confirm-kill-emacs is non-nil, C-x C-c assumes
+;;; that its value is a predicate function, and calls that function.
+
+(setq confirm-kill-emacs 'y-or-n-p)
+
 ;; ;; ----------------------
 ;; ;; Final newline handling
 ;; ;; ----------------------
