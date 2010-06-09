@@ -1,7 +1,8 @@
 (setq additional-paths-common '("/home/nipra/.emacs.d"
 				"/home/nipra/.emacs.d/magit"
 				"/home/nipra/.emacs.d/emacs-w3m"
-				"/home/nipra/.emacs.d/twittering-mode"))
+				"/home/nipra/.emacs.d/twittering-mode"
+				"/home/nipra/.emacs.d/color-themes"))
 
 (setq load-path (append additional-paths-common load-path))
 
@@ -34,7 +35,7 @@
 (setq query-replace-highlight t)
 (setq search-highlight t)
 (setq mouse-avoidance-mode 'banish)
-(set-frame-font "DejaVu Sans Mono-8")
+(set-frame-font "DejaVu Sans Mono-10")
 
 
 ;; X11 Copy & Paste to/from Emacs
@@ -83,9 +84,17 @@
 
 ;; ;; ;; COLOR-THEME
 (require 'color-theme)
+(color-theme-hober)
+
 (require 'zenburn)
 ;; (zenburn)
-(color-theme-hober)
+
+(require 'color-theme-billc)
+;; (color-theme-billc)
+
+(require 'gentooish)
+;; (color-theme-gentooish)
+
 
 ;; ;; ;; -----------------
 ;; ;; ;; Insert time stamp
@@ -493,12 +502,12 @@
 
 
 ;; http://www.emacswiki.org/emacs-en/ShellPop
-(require 'shell-pop)
-(shell-pop-set-internal-mode "ansi-term")
-(shell-pop-set-internal-mode-shell "/bin/bash")
-(shell-pop-set-window-height 100) ;the number for the percentage of the selected window. if 100, shell-pop use the whole of selected window, not spliting.
-(shell-pop-set-window-position "bottom") ;shell-pop-up position. You can choose "top" or "bottom". 
-(global-set-key [f8] 'shell-pop)
+;; (require 'shell-pop)
+;; (shell-pop-set-internal-mode "ansi-term")
+;; (shell-pop-set-internal-mode-shell "/bin/bash")
+;; (shell-pop-set-window-height 100) ;the number for the percentage of the selected window. if 100, shell-pop use the whole of selected window, not spliting.
+;; (shell-pop-set-window-position "bottom") ;shell-pop-up position. You can choose "top" or "bottom". 
+;; (global-set-key [f8] 'shell-pop)
 
 
 ;;; http://www.emacswiki.org/emacs/TwitteringMode
@@ -697,9 +706,10 @@
 ;;; MultiTerm
 ;;; http://www.emacswiki.org/emacs/MultiTerm
 
-(require 'multi-term)
-(setq multi-term-program "/bin/bash")
+;; (require 'multi-term)
+;; (setq multi-term-program "/bin/bash")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (defun multi-term-dedicated-toggle*
 ;;   (interactive)
 ;;   (multi-term-dedicated-toggle)
@@ -728,38 +738,39 @@
 ;;          (if (string-match "^.+//[0-9]+$" (buffer-name b))
 ;; 	     (first (last (split-string (buffer-name b) "[/]")))
 ;; 	   (cadr (split-string (buffer-name b)  "[<>]"))))))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun multi-term-dedicated-open* ()
-  (interactive)
-  (multi-term-dedicated-open)
-  (multi-term-dedicated-select))
+;; (defun multi-term-dedicated-open* ()
+;;   (interactive)
+;;   (multi-term-dedicated-open)
+;;   (multi-term-dedicated-select))
 
-(defun multi-term-dedicated-open** ()
-  (interactive)
-  (other-window 1)
-  (delete-window)
-  (other-window -1)
-  (multi-term-dedicated-open)
-  (multi-term-dedicated-select))
+;; (defun multi-term-dedicated-open** ()
+;;   (interactive)
+;;   (other-window 1)
+;;   (delete-window)
+;;   (other-window -1)
+;;   (multi-term-dedicated-open)
+;;   (multi-term-dedicated-select))
 
-(defun multi-term-dedicated-close* ()
-  (interactive)
-  (multi-term-dedicated-close)
-  (other-window -1))
+;; (defun multi-term-dedicated-close* ()
+;;   (interactive)
+;;   (multi-term-dedicated-close)
+;;   (other-window -1))
 
-(defun multi-term-dedicated-close** ()
-  (interactive)
-  (multi-term-dedicated-close*)
-  (split-window-vertically)
-  (other-window 1))
+;; (defun multi-term-dedicated-close** ()
+;;   (interactive)
+;;   (multi-term-dedicated-close*)
+;;   (split-window-vertically)
+;;   (other-window 1))
 
-(global-set-key (kbd "C-c C-t") 'multi-term)
-(global-set-key (kbd "C-c C-n") 'multi-term-next)
-(global-set-key (kbd "C-c C-p") 'multi-term-prev)
-(global-set-key (kbd "<f1>") 'multi-term-dedicated-open*)
-(global-set-key (kbd "<f2>") 'multi-term-dedicated-close*)
-(global-set-key (kbd "<f7>") 'multi-term-dedicated-open**)
-(global-set-key (kbd "<f9>") 'multi-term-dedicated-close**)
+;; (global-set-key (kbd "C-c C-t") 'multi-term)
+;; (global-set-key (kbd "C-c C-n") 'multi-term-next)
+;; (global-set-key (kbd "C-c C-p") 'multi-term-prev)
+;; (global-set-key (kbd "<f1>") 'multi-term-dedicated-open*)
+;; (global-set-key (kbd "<f2>") 'multi-term-dedicated-close*)
+;; (global-set-key (kbd "<f7>") 'multi-term-dedicated-open**)
+;; (global-set-key (kbd "<f9>") 'multi-term-dedicated-close**)
 
 
 (provide 'init-common)

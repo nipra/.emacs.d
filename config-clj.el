@@ -10,7 +10,8 @@
 (require 'slime-autoloads)
 (slime-setup '(slime-fancy
                slime-repl
-               slime-asdf))
+               slime-asdf
+	       slime-fuzzy))
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (slime-mode t)))
 
@@ -23,6 +24,13 @@
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code."
   t)
+
+(add-hook 'slime-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'lisp-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'slime-connected-hook (lambda () (paredit-mode +1)))
+;; (setq slime-complete-symbol*-fancy t)
+(setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; http://groups.google.com/group/clojure/msg/b5a4f5b3b7e63d35
@@ -194,12 +202,7 @@
           (define-key paredit-mode-map (kbd "C-c v") 'paredit-splice-sexp-killing-forward)))
 
 
-(add-hook 'slime-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'lisp-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'slime-connected-hook (lambda () (paredit-mode +1)))
-;; (setq slime-complete-symbol*-fancy t)
-(setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
+
 
 
 

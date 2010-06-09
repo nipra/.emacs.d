@@ -32,6 +32,7 @@
 (slime-setup '(slime-repl
                slime-fancy
                slime-asdf
+	       slime-fuzzy
                ;; slime-indentation
                ))
 ;; (slime-setup)

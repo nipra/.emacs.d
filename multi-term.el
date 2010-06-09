@@ -1,14 +1,15 @@
 ;;; multi-term.el --- Managing multiple terminal buffers in Emacs.
 
 ;; Author: Andy Stewart <lazycat.manatee@gmail.com>
-;; Maintainer: FENG Jiabin <benplusplus@gmail.com>
+;; Maintainer: ahei <ahei0802@gmail.com>
 ;; Copyright (C) 2008, 2009, Andy Stewart, all rights reserved.
-;; Created: 2008-09-19 23:02:42
+;; Copyright (C) 2010, ahei, all rights reserved.
+;; Created: <2008-09-19 23:02:42>
 ;; Version: 0.8.8
-;; Last-Updated: 2009-07-04 06:27:31
+;; Last-Updated: <2010-05-13 00:40:24 Thursday by ahei>
 ;; URL: http://www.emacswiki.org/emacs/download/multi-term.el
 ;; Keywords: term, terminal, multiple buffer
-;; Compatibility: GNU Emacs 23.0.60.1
+;; Compatibility: GNU Emacs 23.2.1
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -559,23 +560,6 @@ If option DEDICATED-WINDOW is `non-nil' will create dedicated `multi-term' windo
     (when multi-term-switch-after-close
       (multi-term-switch-internal multi-term-switch-after-close 1))))
 
-;; (defun multi-term-list ()
-;;   "List term buffers presently active."
-;;   ;; Autload command `remove-if-not'.
-;;   (autoload 'remove-if-not "cl-seq")
-;;   (sort
-;;    (remove-if-not (lambda (b)
-;;                     (setq case-fold-search t)
-;;                     (string-match
-;;                      (format "^\\\*%s<[0-9]+>\\\*$" multi-term-buffer-name)
-;;                      (buffer-name b)))
-;;                   (buffer-list))
-;;    (lambda (a b)
-;;      (< (string-to-number
-;;          (cadr (split-string (buffer-name a) "[<>]")))
-;;         (string-to-number
-;;          (cadr (split-string (buffer-name b)  "[<>]")))))))
-
 (defun multi-term-list ()
   "List term buffers presently active."
   ;; Autload command `remove-if-not'.
@@ -583,22 +567,15 @@ If option DEDICATED-WINDOW is `non-nil' will create dedicated `multi-term' windo
   (sort
    (remove-if-not (lambda (b)
                     (setq case-fold-search t)
-                    (or (string-match
-			 (format "^\\\*%s<[0-9]+>\\\*$" multi-term-buffer-name)
-			 (buffer-name b))
-			(string-match
-			 "^.+//[0-9]+$"
-			 (buffer-name b))))
+                    (string-match
+                     (format "^\\\*%s<[0-9]+>\\\*$" multi-term-buffer-name)
+                     (buffer-name b)))
                   (buffer-list))
    (lambda (a b)
      (< (string-to-number
-         (if (string-match "^.+//[0-9]+$" (buffer-name a))
-	     (first (last (split-string (buffer-name a) "[/]")))
-	   (cadr (split-string (buffer-name a) "[<>]"))))
+         (cadr (split-string (buffer-name a) "[<>]")))
         (string-to-number
-         (if (string-match "^.+//[0-9]+$" (buffer-name b))
-	     (first (last (split-string (buffer-name b) "[/]")))
-	   (cadr (split-string (buffer-name b)  "[<>]"))))))))
+         (cadr (split-string (buffer-name b)  "[<>]")))))))
 
 (defun multi-term-switch (direction offset)
   "Switch `multi-term' buffers.
@@ -777,6 +754,12 @@ This advice can make `other-window' skip `multi-term' dedicated window."
       (other-window count))))
 
 (provide 'multi-term)
+
+;; Local Variables:
+;; time-stamp-line-limit: 10
+;; time-stamp-start: "Last-Updated: <"
+;; time-stamp-end: ">"
+;; End:
 
 ;;; multi-term.el ends here
 
