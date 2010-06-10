@@ -35,7 +35,7 @@
 (setq query-replace-highlight t)
 (setq search-highlight t)
 (setq mouse-avoidance-mode 'banish)
-(set-frame-font "DejaVu Sans Mono-10")
+(set-frame-font "DejaVu Sans Mono-8")
 
 
 ;; X11 Copy & Paste to/from Emacs
@@ -772,9 +772,17 @@
 ;; (global-set-key (kbd "<f7>") 'multi-term-dedicated-open**)
 ;; (global-set-key (kbd "<f9>") 'multi-term-dedicated-close**)
 
+;;; Via #emacs
+(defun lnap ()
+  (interactive)
+  (message "%s" (line-number-at-pos)))
+
+(require 'line-num)
+
+(add-to-list 'load-path "~/.emacs.d/auto-complete-installation/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete-installation//ac-dict")
+(ac-config-default)
+(define-key ac-mode-map (kbd "C-c C-t") 'auto-complete)
 
 (provide 'init-common)
-
-
-
-

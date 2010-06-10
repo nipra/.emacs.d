@@ -1,13 +1,18 @@
 (setq additional-paths-clj '("/home/nipra/.emacs.d"
 			     "/home/nipra/.emacs.d/clj-new/swank-clojure"
-			     "/home/nipra/.emacs.d/clj-new/slime"
-			     "/home/nipra/.emacs.d/clj-new/slime/contrib"
+			     ;; "/home/nipra/.emacs.d/clj-new/slime-git-technomancy"
+			     ;; "/home/nipra/.emacs.d/clj-new/slime-git-technomancy/contrib"
+			     ;; "/home/nipra/.emacs.d/elpa/slime-20091016"
+			     ;; "/home/nipra/.emacs.d/elpa/slime-repl-20091016"
+			     "/home/nipra/.emacs.d/clj-new/slime-from-old-setup"
+			     "/home/nipra/.emacs.d/clj-new/slime-from-old-setup/contrib"
 			     "/home/nipra/.emacs.d/clj-new/clojure-mode"))
 
 (setq load-path (append additional-paths-clj load-path))
 
 ;; Slime
 (require 'slime-autoloads)
+;; (require 'slime-repl-autoloads)
 (slime-setup '(slime-fancy
                slime-repl
                slime-asdf))
