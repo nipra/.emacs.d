@@ -1,7 +1,7 @@
 (setq additional-paths-common '("/home/nipra/.emacs.d"
                                 "/home/nipra/.emacs.d/magit"
                                 "/home/nipra/.emacs.d/emacs-w3m"
-                                "/home/nipra/.emacs.d/twittering-mode"
+                                "/home/nipra/.emacs.d/twittering-mode-new"
                                 "/home/nipra/.emacs.d/color-themes"
                                 "/home/nipra/.emacs.d/py"))
 
@@ -44,6 +44,11 @@
 
 ;; 'y' for 'yes', 'n' for 'no'
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;;; If the value of the variable confirm-kill-emacs is non-nil, C-x C-c assumes
+;;; that its value is a predicate function, and calls that function.
+
+(setq confirm-kill-emacs 'y-or-n-p)
 
 ;; ;; ----------------------
 ;; ;; Final newline handling
@@ -773,8 +778,56 @@
 
 (require 'config-py)
 
+;;; Via #emacs
+(defun lnap ()
+  (interactive)
+  (message "%s" (line-number-at-pos)))
+
+(require 'line-num)
+
+(add-to-list 'load-path "~/.emacs.d/auto-complete-installation/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete-installation//ac-dict")
+(ac-config-default)
+(define-key ac-mode-map (kbd "M-y") 'auto-complete)
+
+
+;;;
+(require 'framemove)
+;; (framemove-default-keybindings) ;; default prefix is Meta
+
+;;; http://www.emacswiki.org/emacs/frame-cmds.el
+(require 'frame-cmds)
+;; (global-set-key [(meta up)] 'move-frame-up)
+;; (global-set-key [(meta down)] 'move-frame-down)
+;; (global-set-key [(meta left)] 'move-frame-left)
+;; (global-set-key [(meta right)] 'move-frame-right)
+;; (global-set-key [(control meta down)] 'enlarge-frame)
+;; (global-set-key [(control meta right)] 'enlarge-frame-horizontally)
+;; (global-set-key [(control meta up)] 'shrink-frame)
+;; (global-set-key [(control meta left)] 'shrink-frame-horizontally)
+
+;; (global-set-key [(control ?x) (control ?z)] 'iconify-everything)
+;; (global-set-key [vertical-line S-down-mouse-1] 'iconify-everything)
+;; (global-set-key [(control ?z)] 'iconify/map-frame)
+;; (global-set-key [mode-line mouse-3] 'mouse-iconify/map-frame)
+;; (global-set-key [mode-line C-mouse-3] 'mouse-remove-window)
+;; (global-set-key [(control meta ?z)] 'show-hide)
+;; (global-set-key [vertical-line C-down-mouse-1] 'show-hide)
+;; (global-set-key [C-down-mouse-1] 'mouse-show-hide-mark-unmark)
+;; (substitute-key-definition 'delete-window 'remove-window global-map)
+;; (define-key ctl-x-map "o" 'other-window-or-frame)
+;; (define-key ctl-x-4-map "1" 'delete-other-frames)
+;; (define-key ctl-x-5-map "h" 'show-*Help*-buffer)
+;; (substitute-key-definition 'delete-window 'delete-windows-for global-map)
+;; (define-key global-map "\C-xt." 'save-frame-config)
+;; (define-key ctl-x-map "o" 'other-window-or-frame)
+;;
+;;   (defalias 'doremi-prefix (make-sparse-keymap))
+;;   (defvar doremi-map (symbol-function 'doremi-prefix) "Keymap for Do Re Mi commands.")
+;;   (define-key global-map "\C-xt" 'doremi-prefix)
+;;   (define-key doremi-map "." 'save-frame-config)
+
+(require 'cheat)
+
 (provide 'init-common)
-
-
-
-
