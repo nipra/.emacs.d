@@ -2,8 +2,9 @@
 				"/home/nipra/.emacs.d/magit"
 				"/home/nipra/.emacs.d/emacs-w3m"
 				"/home/nipra/.emacs.d/twittering-mode-new"
-				"/home/nipra/.emacs.d/color-themes"
-				"/home/nipra/.emacs.d/emms-3.0"))
+				"/home/nipra/.emacs.d/emms-3.0"
+                                "/home/nipra/.emacs.d/color-themes"
+                                "/home/nipra/.emacs.d/py"))
 
 (setq load-path (append additional-paths-common load-path))
 
@@ -79,6 +80,9 @@
 ;; (setq-default tab-width 8
 ;; 	      standard-indent 4
 ;; 	      indent-tabs-mode nil)
+
+(setq-default tab-width 4
+	          indent-tabs-mode nil)
 
 ;;; anything
 (require 'anything)
@@ -707,8 +711,8 @@
 ;;; MultiTerm
 ;;; http://www.emacswiki.org/emacs/MultiTerm
 
-;; (require 'multi-term)
-;; (setq multi-term-program "/bin/bash")
+(require 'multi-term)
+(setq multi-term-program "/bin/bash")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (defun multi-term-dedicated-toggle*
@@ -772,6 +776,8 @@
 ;; (global-set-key (kbd "<f2>") 'multi-term-dedicated-close*)
 ;; (global-set-key (kbd "<f7>") 'multi-term-dedicated-open**)
 ;; (global-set-key (kbd "<f9>") 'multi-term-dedicated-close**)
+
+(require 'config-py)
 
 ;;; Via #emacs
 (defun lnap ()
