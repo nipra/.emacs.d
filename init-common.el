@@ -2,7 +2,8 @@
 				"/home/nipra/.emacs.d/magit"
 				"/home/nipra/.emacs.d/emacs-w3m"
 				"/home/nipra/.emacs.d/twittering-mode-new"
-				"/home/nipra/.emacs.d/color-themes"))
+				"/home/nipra/.emacs.d/color-themes"
+				"/home/nipra/.emacs.d/emms-3.0"))
 
 (setq load-path (append additional-paths-common load-path))
 
@@ -823,5 +824,20 @@
 ;;   (define-key doremi-map "." 'save-frame-config)
 
 (require 'cheat)
+
+;;; EMMS
+
+;;; http://www.gnu.org/software/emms/quickstart.html
+(require 'emms-setup)
+(emms-standard)
+(emms-default-players)
+
+;;; http://www.gnu.org/software/emms/manual/Configuration.html#Configuration
+(require 'emms-player-simple)
+(require 'emms-source-file)
+(require 'emms-source-playlist)
+(setq emms-player-list '(emms-player-mpg321
+			 emms-player-ogg123
+			 emms-player-mplayer))
 
 (provide 'init-common)
