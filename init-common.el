@@ -1,8 +1,8 @@
 (setq additional-paths-common '("/home/nipra/.emacs.d"
-				"/home/nipra/.emacs.d/magit"
-				"/home/nipra/.emacs.d/emacs-w3m"
-				"/home/nipra/.emacs.d/twittering-mode-new"
-				"/home/nipra/.emacs.d/emms-3.0"
+                                "/home/nipra/.emacs.d/magit"
+                                "/home/nipra/.emacs.d/emacs-w3m"
+                                "/home/nipra/.emacs.d/twittering-mode-new"
+                                "/home/nipra/.emacs.d/emms-3.0"
                                 "/home/nipra/.emacs.d/color-themes"
                                 "/home/nipra/.emacs.d/py"))
 
@@ -125,8 +125,7 @@
 ;; ;; ;; ---------
 ;; ;; ;; Automodes
 ;; ;; ;; ---------
-(setq auto-mode-alist (append '(("\\.py$" . python-mode)
-                                ("\\.conf$" . conf-mode)
+(setq auto-mode-alist (append '(("\\.conf$" . conf-mode)
                                 ("\\.sh$" . shell-script-mode)
                                 ("\\.txt$" . text-mode)
                                 ("\\.lisp" . lisp-mode)
@@ -146,7 +145,7 @@
   (interactive) 
   (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen) 
                                            nil 
-                                           'fullboth)))
+                                         'fullboth)))
 (global-set-key [(meta return)] 'toggle-fullscreen) 
 
 (when (executable-find "wmctrl")        ; apt-get install wmctrl
@@ -162,7 +161,7 @@
 ;; Set the name of the host and current path/file in title bar:
 (setq frame-title-format
       (list (format "%s %%S: %%j " (system-name))
-	    '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+            '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
 
 ;; ;; ;; PAREDIT-MODE
@@ -201,10 +200,10 @@
   (unless (eql major-mode 'w3m-mode)
     (if (> (length (window-list)) 2)
         (other-window 0)
-        (if (= (length (window-list)) 1)
-            (progn (split-window-vertically)
-                   (other-window 1))
-            (other-window 1))))
+      (if (= (length (window-list)) 1)
+          (progn (split-window-vertically)
+                 (other-window 1))
+        (other-window 1))))
   (w3m-new-tab)
   (w3m-browse-url url))
 
@@ -230,9 +229,9 @@
   (interactive)
   (let ((filename (concat (make-temp-file "w3m-") ".html")))
     (unwind-protect
-	(progn
-	  (write-region (point-min) (point-max) filename)
-	  (w3m-find-file filename))
+        (progn
+          (write-region (point-min) (point-max) filename)
+          (w3m-find-file filename))
       (delete-file filename))))
 
 
@@ -243,8 +242,8 @@
 
 (setq w3m-multibookmarks-list
       '(("b"  "~/.emacs.d/data/bookmarks.html" "Firefox")
-	("w"  "~/.w3m/bookmark.html" "w3m")
-	("f" "~/.mozilla/firefox/7d5an3qn.default/bookmarks.html" "FF Updated")))
+        ("w"  "~/.w3m/bookmark.html" "w3m")
+        ("f" "~/.mozilla/firefox/7d5an3qn.default/bookmarks.html" "FF Updated")))
 
 ;; (eval-after-load 'w3m-multibookmarks
 ;;   '(progn 
@@ -372,10 +371,10 @@
   (let ((selector (if (>= arg 0) 'next-window 'previous-window)))
     (while (/= arg 0)
       (let ((this-win (window-buffer))
-	    (next-win (window-buffer (funcall selector))))
-	(set-window-buffer (selected-window) next-win)
-	(set-window-buffer (funcall selector) this-win)
-	(select-window (funcall selector)))
+            (next-win (window-buffer (funcall selector))))
+        (set-window-buffer (selected-window) next-win)
+        (set-window-buffer (funcall selector) this-win)
+        (select-window (funcall selector)))
       (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
 
 
@@ -387,9 +386,9 @@
   (interactive)
   (let ((other-window (next-window (selected-window) 'no-minibuf)))
     (let ((other-window-buffer (window-buffer other-window))
-	  (other-window-hscroll (window-hscroll other-window))
-	  (other-window-point (window-point other-window))
-	  (other-window-start (window-start other-window)))
+          (other-window-hscroll (window-hscroll other-window))
+          (other-window-point (window-point other-window))
+          (other-window-start (window-start other-window)))
       (set-window-buffer other-window (current-buffer))
       (set-window-hscroll other-window (window-hscroll (selected-window)))
       (set-window-point other-window (point))
@@ -411,25 +410,25 @@
   "Swap buffers between two windows"
   (interactive)
   (if (and swapping-window
-	   swapping-buffer)
+           swapping-buffer)
       (let ((this-buffer (current-buffer))
-	    (this-window (selected-window)))
-	(if (and (window-live-p swapping-window)
-		 (buffer-live-p swapping-buffer))
-	    (progn (switch-to-buffer swapping-buffer)
-		   (select-window swapping-window)
-		   (switch-to-buffer this-buffer)
-		   (select-window this-window)
-		   (message "Swapped buffers."))
-	  (message "Old buffer/window killed.  Aborting."))
-	(setq swapping-buffer nil)
-	(setq swapping-window nil))
+            (this-window (selected-window)))
+        (if (and (window-live-p swapping-window)
+                 (buffer-live-p swapping-buffer))
+            (progn (switch-to-buffer swapping-buffer)
+                   (select-window swapping-window)
+                   (switch-to-buffer this-buffer)
+                   (select-window this-window)
+                   (message "Swapped buffers."))
+          (message "Old buffer/window killed.  Aborting."))
+        (setq swapping-buffer nil)
+        (setq swapping-window nil))
     (progn
       (setq swapping-buffer (current-buffer))
       (setq swapping-window (selected-window))
       (message "Buffer and window marked for swapping."))))
 
- (global-set-key (kbd "C-c p") 'swap-buffers-in-windows)
+(global-set-key (kbd "C-c p") 'swap-buffers-in-windows)
 
 ;;; Yet another window-altering function by Robert Bost slightly based on Steve Yegge’s swap-windows. This one
 ;;; will handle > 1 windows.
@@ -437,25 +436,25 @@
   "Rotate your windows"
   (interactive)
   (cond ((not (> (count-windows) 1)) (message "You can't rotate a sinlge window!"))
-	(t
-	 (setq i 1)
-	 (setq numWindows (count-windows))
-	 (while  (< i numWindows)
-	   (let* (
-		  (w1 (elt (window-list) i))
-		  (w2 (elt (window-list) (+ (% i numWindows) 1)))
+        (t
+         (setq i 1)
+         (setq numWindows (count-windows))
+         (while  (< i numWindows)
+           (let* (
+                  (w1 (elt (window-list) i))
+                  (w2 (elt (window-list) (+ (% i numWindows) 1)))
 
-		  (b1 (window-buffer w1))
-		  (b2 (window-buffer w2))
+                  (b1 (window-buffer w1))
+                  (b2 (window-buffer w2))
 
-		  (s1 (window-start w1))
-		  (s2 (window-start w2))
-		  )
-	     (set-window-buffer w1  b2)
-	     (set-window-buffer w2 b1)
-	     (set-window-start w1 s2)
-	     (set-window-start w2 s1)
-	     (setq i (1+ i)))))))
+                  (s1 (window-start w1))
+                  (s2 (window-start w2))
+                  )
+             (set-window-buffer w1  b2)
+             (set-window-buffer w2 b1)
+             (set-window-start w1 s2)
+             (set-window-start w2 s1)
+             (setq i (1+ i)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Global key bindings
@@ -463,13 +462,13 @@
 
 
 (global-set-key (kbd "C-x M-k") 'kill-some-buffers)
-;(global-set-key (kbd "C-c C-l") 'move-to-window-line)
+                                        ;(global-set-key (kbd "C-c C-l") 'move-to-window-line)
 (global-set-key (kbd "<f2>") 'select-frame-by-name)
 (global-set-key (kbd "<f3>") 'set-frame-name)
 (global-set-key (kbd "C-x M-r") 'rename-buffer)
 (global-set-key (kbd "C-x M-b") 'rename-buffer*)
 (global-set-key (kbd "<f6>") 'advertised-undo)
-;(global-set-key "\C-xs" 'kill-some-buffers)
+                                        ;(global-set-key "\C-xs" 'kill-some-buffers)
 (global-set-key (kbd "RET") 'newline-and-indent)
 
 (global-set-key (kbd "C-M-y") 'scroll-other-down-full-screen)
@@ -493,16 +492,16 @@
 ;;      (expand-file-name "~/.emacs.d/elpa/package.el"))
 ;;   (package-initialize))
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 
 
@@ -524,7 +523,7 @@
 (setq twittering-timer-interval 300)         ; Update your timeline each 300 seconds (5 minutes)
 (setq twittering-tmp-dir "~/.emacs.d/twittering-mode/twittering-tmp-dir") ; Directory to store buddy icons
 (nconc twittering-tinyurl-services-map '((unu . "http://u.nu/unu-api-simple?url=")
-					 (bitly . "http://api.bit.ly/v3/shorten?login=nipra&apiKey=R_1f466bc1d834924dddc8bbb488001e6b&format=txt&uri=")))
+                                         (bitly . "http://api.bit.ly/v3/shorten?login=nipra&apiKey=R_1f466bc1d834924dddc8bbb488001e6b&format=txt&uri=")))
 (setq twittering-tinyurl-service 'unu)
 
 ;; (add-hook 'twittering-mode-hook
@@ -545,14 +544,14 @@
 ;;   (interactive)
 ;;   (twittering-mode)
 ;;   (twittering-icon-mode)
-  
+
 ;;   (mapcar (lambda (x)
 ;; 	    (split-window-horizontally)
 ;; 	    (other-window 1)
 ;; 	    (twittering-search x))
-	       
+
 ;; 	  '("#clojure" "common lisp" "#emacs"))
-  
+
 ;;   (split-window-horizontally)
 ;;   (twittering-replies-timeline)
 ;;   (twittering-icon-mode)
@@ -561,7 +560,7 @@
 ;; 	    (other-window 1)
 ;; 	    (twittering-icon-mode))
 ;; 	  '(1 2 3 4))
-  
+
 ;;   (balance-windows))
 
 ;; (defun start-twittering-quick ()
@@ -572,13 +571,13 @@
 ;; 	    (split-window-horizontally)
 ;; 	    (other-window 1)
 ;; 	    (twittering-search x))
-	       
+
 ;; 	  '("#clojure" "#lisp" "#emacs"))
-  
+
 ;;   (split-window-horizontally)
 ;;   (other-window 1)
 ;;   (twittering-replies-timeline)
-  
+
 ;;   (balance-windows))
 
 (defun start-twittering-quick* ()
@@ -628,9 +627,9 @@
   (let ((color
          (if buffer-read-only
              "green"
-             (if overwrite-mode
-                 "blue"
-                 "red"))))
+           (if overwrite-mode
+               "blue"
+             "red"))))
     (unless (and
              (string= color hcz-set-cursor-color-color)
              (string= (buffer-name) hcz-set-cursor-color-buffer))
@@ -678,7 +677,7 @@
 (defun my-setup-hl-line ()
   (hl-line-mode 1)
   (setq cursor-type nil) ; Comment this out, if you want the cursor to
-			 ; stay visible.
+                                        ; stay visible.
   )
 
 (add-hook 'gnus-summary-mode-hook 'my-setup-hl-line)
@@ -705,7 +704,7 @@
 (defun star-rating (movie n comment)
   (interactive "MMovie: \nnRating: \nMComment: ")
   (let ((n-white-stars (make-string (- 10 n) ?☆))
-	(n-black-stars (make-string n ?★)))
+        (n-black-stars (make-string n ?★)))
     (insert movie ": " (concat n-black-stars n-white-stars) ". " comment ".")))
 
 ;;; MultiTerm
@@ -777,7 +776,7 @@
 ;; (global-set-key (kbd "<f7>") 'multi-term-dedicated-open**)
 ;; (global-set-key (kbd "<f9>") 'multi-term-dedicated-close**)
 
-(require 'config-py)
+
 
 ;;; Via #emacs
 (defun lnap ()
@@ -798,7 +797,7 @@
 ;; (framemove-default-keybindings) ;; default prefix is Meta
 
 ;;; http://www.emacswiki.org/emacs/frame-cmds.el
-(require 'frame-cmds)
+;; (require 'frame-cmds)
 ;; (global-set-key [(meta up)] 'move-frame-up)
 ;; (global-set-key [(meta down)] 'move-frame-down)
 ;; (global-set-key [(meta left)] 'move-frame-left)
@@ -843,7 +842,8 @@
 (require 'emms-source-file)
 (require 'emms-source-playlist)
 (setq emms-player-list '(emms-player-mpg321
-			 emms-player-ogg123
-			 emms-player-mplayer))
+                         emms-player-ogg123
+                         emms-player-mplayer))
 
+(require 'config-py)
 (provide 'init-common)
