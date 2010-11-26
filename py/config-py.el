@@ -1,4 +1,4 @@
-(setq ansi-color-for-comint-mode t)
+;; (setq ansi-color-for-comint-mode t)
 
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
 (setq interpreter-mode-alist (cons '("python" . python-mode)
@@ -6,7 +6,7 @@
 (autoload 'python-mode "python-mode" "Python editing mode." t)
 
 (setq py-python-command "ipython")
-
+(setq py-python-command-args '("-colors" "NoColor"))
 
 ;; (require 'ipython)
 

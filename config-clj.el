@@ -2,7 +2,8 @@
 			     "/home/nipra/.emacs.d/clj/swank-clojure"
 			     "/home/nipra/.emacs.d/clj/slime"
 			     "/home/nipra/.emacs.d/clj/slime/contrib"
-			     "/home/nipra/.emacs.d/clj/clojure-mode-1.5"))
+			     ;; "/home/nipra/.emacs.d/clj/clojure-mode-1.5"
+                 "/home/nipra/.emacs.d/clj/clojure-mode-1.8.0"))
 
 (setq load-path (append additional-paths-clj load-path))
 

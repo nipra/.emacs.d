@@ -846,4 +846,15 @@
                          emms-player-mplayer))
 
 (require 'config-py)
+
+;;; http://trey-jackson.blogspot.com/2008/01/emacs-tip-11-uniquify.html
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'reverse)
+(setq uniquify-separator "|")
+;; (setq uniquify-after-kill-buffer-p t)
+                                        ; rename after killing uniquified
+(setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+
 (provide 'init-common)
+
+
