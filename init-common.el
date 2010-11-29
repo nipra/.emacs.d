@@ -89,6 +89,7 @@
 
 ;; ;; ;; COLOR-THEME
 (require 'color-theme)
+(color-theme-initialize)
 (color-theme-hober)
 
 (require 'zenburn)
