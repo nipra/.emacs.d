@@ -1,0 +1,15 @@
+* TODO [0%] Write Map reduce function for mongodb in zeno.utils.hummus.core.  :MongoDB:
+  DEADLINE: <2010-11-30 Tue>
+** TODO Main function
+** TODO Write util function for getting
+   - Remember to handle nested maps.
+  
+
+* TODO Read Flask documentation.                                      :metis:
+  DEADLINE: <2010-12-02 Thu> SCHEDULED: <2010-11-30 Tue 16:00-17:00 +1d>
+
+* TODO Read about authentication.
+  DEADLINE: <2010-12-15 Wed>
+* TODO Hudson                                                      :Research:
+* TODO Pallet                                                      :Research:
+* TODO War                                                         :Research:

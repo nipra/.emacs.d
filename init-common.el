@@ -4,7 +4,8 @@
                                 "/home/nipra/.emacs.d/twittering-mode-new"
                                 "/home/nipra/.emacs.d/emms-3.0"
                                 "/home/nipra/.emacs.d/color-themes"
-                                "/home/nipra/.emacs.d/py"))
+                                "/home/nipra/.emacs.d/py"
+                                "/home/nipra/.emacs.d/erl"))
 
 (setq load-path (append additional-paths-common load-path))
 
@@ -101,6 +102,8 @@
 (require 'gentooish)
 ;; (color-theme-gentooish)
 
+(require 'color-theme-tango)
+;; (color-theme-tango)
 
 ;; ;; ;; -----------------
 ;; ;; ;; Insert time stamp
@@ -846,7 +849,7 @@
                          emms-player-ogg123
                          emms-player-mplayer))
 
-(require 'config-py)
+
 
 ;;; http://trey-jackson.blogspot.com/2008/01/emacs-tip-11-uniquify.html
 (require 'uniquify)
@@ -855,6 +858,14 @@
 ;; (setq uniquify-after-kill-buffer-p t)
                                         ; rename after killing uniquified
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
+
+
+;;; Org Mode Customisation
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-agenda-files '("/home/nipra/.emacs.d/org/todos.org"))
+
+(require 'config-py)
+(require 'config-erl)
 
 (provide 'init-common)
 

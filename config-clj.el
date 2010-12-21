@@ -202,10 +202,13 @@
           (define-key paredit-mode-map (kbd "C-c c") 'paredit-splice-sexp-killing-backward)
           (define-key paredit-mode-map (kbd "C-c v") 'paredit-splice-sexp-killing-forward)))
 
-
-
-
-
-
+;;; Add the following to your .emacs file for better Trammel formatting:
+;;; https://github.com/fogus/trammel
+(eval-after-load 'clojure-mode
+  '(define-clojure-indent
+     (contract 'defun)
+     (defconstrainedfn 'defun)
+     (defcontract 'defun)
+     (provide 'defun)))
 
 (provide 'config-clj)
