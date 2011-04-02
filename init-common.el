@@ -26,6 +26,7 @@
 (setq require-final-newline t)
 (setq resize-minibuffer-frame t)
 (setq column-number-mode t)
+(setq line-number-mode t)
 (setq-default transient-mark-mode t)
 (setq next-line-add-newlines nil)
 (setq blink-matching-paren t)
