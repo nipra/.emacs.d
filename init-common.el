@@ -12,6 +12,7 @@
                                 ;; "/home/nipra/.emacs.d/py-vedang/rope"
                                 ;; "/home/nipra/.emacs.d/py-vedang/ropemode"
                                 "/home/nipra/.emacs.d/erl"
+                                "/home/nipra/.emacs.d/js"
                                 "/home/nipra/.emacs.d/php/php-mode-1.5.0"))
 
 (setq load-path (append additional-paths-common load-path))
@@ -879,8 +880,15 @@
 
 (require 'config-erl)
 
+;;; JavaScript
+(require 'config-js)
+
 ;;; PHP
 (require 'php-mode)
+
+;;; http://kdstevens.com/~stevens/ispell-page.html
+;;; http://www.emacswiki.org/emacs/InteractiveSpell
+(require 'ispell)
 
 (provide 'init-common)
 
