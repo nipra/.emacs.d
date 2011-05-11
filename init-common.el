@@ -14,7 +14,9 @@
                                 "/home/nipra/.emacs.d/erl"
                                 "/home/nipra/.emacs.d/js"
                                 "/home/nipra/.emacs.d/php/php-mode-1.5.0"
-                                "/home/nipra/.emacs.d/oz"))
+                                "/home/nipra/.emacs.d/oz"
+                                "/home/nipra/.emacs.d/hs"
+                                "/home/nipra/.emacs.d/hs/haskellmode-emacs"))
 
 (setq load-path (append additional-paths-common load-path))
 
@@ -885,12 +887,15 @@
 ;;; JavaScript
 (require 'config-js)
 
+;;; Haskell
+(require 'config-hs)
+
 ;;; PHP
 (require 'php-mode)
 
 ;;; http://kdstevens.com/~stevens/ispell-page.html
 ;;; http://www.emacswiki.org/emacs/InteractiveSpell
-(require 'ispell)
+;; (require 'ispell)
 
 (provide 'init-common)
 

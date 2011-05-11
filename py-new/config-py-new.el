@@ -1,8 +1,8 @@
 ;;; http://www.saltycrane.com/blog/2010/05/my-emacs-python-environment/
-(require 'pymacs)
-(pymacs-load "ropemacs" "rope-")
-(setq ropemacs-enable-autoimport t)
-(provide 'config-py-new)
+;; (require 'pymacs)
+;; (pymacs-load "ropemacs" "rope-")
+;; (setq ropemacs-enable-autoimport t)
+
 
 ;;; 
 (add-hook 'find-file-hook 'flymake-find-file-hook)
@@ -21,3 +21,5 @@
 (global-set-key [f11] 'flymake-goto-next-error)
 
 ;;;
+
+(provide 'config-py-new)

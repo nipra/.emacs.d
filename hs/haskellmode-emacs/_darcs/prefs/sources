@@ -1,0 +1,3 @@
+repo:http://code.haskell.org/haskellmode-emacs
+thisrepo:/home/nipra/.emacs.d/hs/haskellmode-emacs
+cache:/home/nipra/.darcs/cache
