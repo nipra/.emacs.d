@@ -5,7 +5,8 @@
                                 "/home/nipra/.emacs.d/emms-3.0"
                                 "/home/nipra/.emacs.d/color-themes"
                                 "/home/nipra/.emacs.d/py"
-                                "/home/nipra/.emacs.d/erl"))
+                                "/home/nipra/.emacs.d/erl"
+                                "/home/nipra/.emacs.d/oz"))
 
 (setq load-path (append additional-paths-common load-path))
 
@@ -866,6 +867,7 @@
 
 (require 'config-py)
 (require 'config-erl)
+(require 'config-oz)
 
 (provide 'init-common)
 
