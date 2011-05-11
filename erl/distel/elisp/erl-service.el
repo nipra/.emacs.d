@@ -1189,18 +1189,17 @@ The match positions are erl-mfa-regexp-{module,function,arity}-match.")
 
 ;;;; Argument lists
 
-(defun erl-openparent ()
-  "Insert a '(' character and arglist."
+(defun erl-openparen ()
+  "Insert a '(' character and show arglist information."
+  (interactive)
+  (erl-show-arglist)
+  (insert "("))
+
+(defun erl-show-arglist ()
+  "Show arglist information."
   (interactive)
   (let ((call (erlang-get-function-under-point)))
-    (erl-print-arglist call erl-nodename-cache (current-buffer))))
-
-(defun erl-openparen (node)
-  "Insert a '(' character and show arglist information."
-  (interactive (list erl-nodename-cache))
-  (let ((call (erlang-get-function-under-point)))
-    (insert "(")
-    (erl-print-arglist call node)))
+    (erl-print-arglist call erl-nodename-cache)))
 
 (defun erl-print-arglist (call node &optional ins-buffer)
   (when (and node (member node erl-nodes))
@@ -1247,7 +1246,9 @@ The match positions are erl-mfa-regexp-{module,function,arity}-match.")
                   (list (intern mod) (intern fun) arity))
     (message "Request sent..")
     (erl-receive ()
-        ((['rex calls]
+        ((['rex ['error reason]]
+          (message "Error: %s" reason))
+         (['rex calls]
           (with-current-buffer (get-buffer-create "*Erlang Calls*")
 	    (erl-who-calls-mode)
             (setq buffer-read-only t)
@@ -1266,7 +1267,8 @@ The match positions are erl-mfa-regexp-{module,function,arity}-match.")
 	      (delete-char 1))
             (goto-char (point-min))
             (message "")
-            (pop-to-buffer (current-buffer))))))))
+            (pop-to-buffer (current-buffer))))
+         ))))
 
 (define-derived-mode erl-who-calls-mode fundamental-mode
   "who-calls"
