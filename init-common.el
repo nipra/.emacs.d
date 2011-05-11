@@ -4,8 +4,16 @@
                                 "/home/nipra/.emacs.d/twittering-mode-new"
                                 "/home/nipra/.emacs.d/emms-3.0"
                                 "/home/nipra/.emacs.d/color-themes"
-                                "/home/nipra/.emacs.d/py"
+                                ;; "/home/nipra/.emacs.d/py"
+                                "/home/nipra/.emacs.d/py-new"
+                                ;; "/home/nipra/.emacs.d/py-vedang"
+                                ;; "/home/nipra/.emacs.d/py-vedang/Pymacs"
+                                ;; "/home/nipra/.emacs.d/py-vedang/ropemacs"
+                                ;; "/home/nipra/.emacs.d/py-vedang/rope"
+                                ;; "/home/nipra/.emacs.d/py-vedang/ropemode"
                                 "/home/nipra/.emacs.d/erl"
+                                "/home/nipra/.emacs.d/js"
+                                "/home/nipra/.emacs.d/php/php-mode-1.5.0"
                                 "/home/nipra/.emacs.d/oz"))
 
 (setq load-path (append additional-paths-common load-path))
@@ -20,6 +28,7 @@
 (setq require-final-newline t)
 (setq resize-minibuffer-frame t)
 (setq column-number-mode t)
+(setq line-number-mode t)
 (setq-default transient-mark-mode t)
 (setq next-line-add-newlines nil)
 (setq blink-matching-paren t)
@@ -865,9 +874,23 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-files '("/home/nipra/.emacs.d/org/todos.org"))
 
-(require 'config-py)
+;; (require 'config-py)
+(require 'config-py-new)
+
+;; (require 'python-mode-config)
+
 (require 'config-erl)
 (require 'config-oz)
+
+;;; JavaScript
+(require 'config-js)
+
+;;; PHP
+(require 'php-mode)
+
+;;; http://kdstevens.com/~stevens/ispell-page.html
+;;; http://www.emacswiki.org/emacs/InteractiveSpell
+(require 'ispell)
 
 (provide 'init-common)
 
