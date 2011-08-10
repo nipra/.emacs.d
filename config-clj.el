@@ -32,6 +32,7 @@
 (add-hook 'slime-connected-hook (lambda () (paredit-mode +1)))
 ;; (setq slime-complete-symbol*-fancy t)
 (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
+(setq slime-net-coding-system 'utf-8-unix)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; http://groups.google.com/group/clojure/msg/b5a4f5b3b7e63d35

@@ -2,13 +2,13 @@
 ;;; http://bc.tech.coop/blog/070528.html
 
 ;; This is needed for Erlang mode setup
-;; (setq erlang-root-dir "/usr/local/lib/erlang")
-;; (setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.6.6.2/emacs" load-path))
-;; (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
+(setq erlang-root-dir "/usr/local/lib/erlang")
+(setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.6.6.4/emacs" load-path))
+(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
 
-(setq erlang-root-dir "/usr/lib/erlang")
-(setq load-path (cons "/usr/lib/erlang/lib/tools-2.6.5/emacs" load-path))
-(setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
+;; (setq erlang-root-dir "/usr/lib/erlang")
+;; (setq load-path (cons "/usr/lib/erlang/lib/tools-2.6.5/emacs" load-path))
+;; (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
 
 (require 'erlang-start)
 
@@ -27,7 +27,8 @@
             ;; when starting an Erlang shell in Emacs, default in the node name
             (setq inferior-erlang-machine-options
                   '("-sname" "emacs"
-                    "-pa" "/home/nipra/.emacs.d/erl/distel/src"))
+                    "-pa" "/home/nipra/.emacs.d/erl/distel/src"
+                    "-pa" "/home/nipra/Erlang/source"))
             ;; add Erlang functions to an imenu menu
             ;; (imenu-add-to-menubar "imenu")
             ))

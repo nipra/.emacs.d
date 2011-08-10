@@ -66,6 +66,7 @@
 (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
 (add-hook 'slime-connected-hook (lambda () (paredit-mode +1)))
 (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
+(setq slime-net-coding-system 'utf-8-unix)
 ;; (setq slime-complete-symbol 'slime-fuzzy-complete-symbol)
 ;; (setq slime-simple-complete-symbol 'slime-fuzzy-complete-symbol)
 

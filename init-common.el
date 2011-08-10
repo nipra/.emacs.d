@@ -50,7 +50,7 @@
 (setq query-replace-highlight t)
 (setq search-highlight t)
 (setq mouse-avoidance-mode 'banish)
-(set-frame-font "DejaVu Sans Mono-8")
+(set-frame-font "DejaVu Sans Mono-10")
 
 
 ;; X11 Copy & Paste to/from Emacs
@@ -471,6 +471,18 @@
              (set-window-start w1 s2)
              (set-window-start w2 s1)
              (setq i (1+ i)))))))
+
+
+;;; http://www.emacswiki.org/emacs/RevertBuffer
+(defun revert-all-buffers ()
+  "Refreshes all open buffers from their respective files."
+  (interactive)
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (when (and (buffer-file-name) (not (buffer-modified-p)))
+        (revert-buffer t t t) )))
+  (message "Refreshed open files.") )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Global key bindings
@@ -897,6 +909,9 @@
 ;;; http://www.emacswiki.org/emacs/InteractiveSpell
 ;; (require 'ispell)
 
-(provide 'init-common)
+;;; ibuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(autoload 'ibuffer "ibuffer" "List buffers." t)
 
+(provide 'init-common)
 
