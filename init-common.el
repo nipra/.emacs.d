@@ -85,6 +85,7 @@
 (set-clipboard-coding-system            'utf-8)
 (set-selection-coding-system            'utf-8)
 (setq default-process-coding-system '(utf-8 . utf-8))
+
 ;; (add-to-list 'auto-coding-alist '("." . utf-8))
 
 ;; ;; ;; ---------
@@ -181,12 +182,12 @@
 
 
 ;; ;; ;; PAREDIT-MODE
-(require 'paredit)
-(autoload 'paredit-mode "paredit"
-  "Minor mode for pseudo-structurally editing Lisp code."
-  t)
+;; (require 'paredit)
+;; (autoload 'paredit-mode "paredit"
+;;   "Minor mode for pseudo-structurally editing Lisp code."
+;;   t)
 
-(add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode t)))
+;; (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode t)))
 
 
 ;; -----
@@ -633,11 +634,11 @@
 
 ;; Typing Speed
 ;;; http://www.pluralsight-training.net/community/blogs/craig/archive/2008/10/07/typing-speed-mode-emacs-minor-mode.aspx
-(require 'typing-speed)
-(add-hook 'text-mode-hook (lambda () (typing-speed-mode t)))
-(add-hook 'clojure-mode-hook (lambda () (typing-speed-mode t)))
-(add-hook 'lisp-mode-hook (lambda () (typing-speed-mode t)))
-(add-hook 'python-mode-hook (lambda () (typing-speed-mode t)))
+;; (require 'typing-speed)
+;; (add-hook 'text-mode-hook (lambda () (typing-speed-mode t)))
+;; (add-hook 'clojure-mode-hook (lambda () (typing-speed-mode t)))
+;; (add-hook 'lisp-mode-hook (lambda () (typing-speed-mode t)))
+;; (add-hook 'python-mode-hook (lambda () (typing-speed-mode t)))
 
 
 ;; http://www.emacswiki.org/emacs/EmacsNiftyTricks
@@ -902,8 +903,15 @@
 ;;; Haskell
 (require 'config-hs)
 
+;;; Ruby
+(require 'config-rb)
+
 ;;; PHP
 (require 'php-mode)
+
+;;; YAML
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ;;; http://kdstevens.com/~stevens/ispell-page.html
 ;;; http://www.emacswiki.org/emacs/InteractiveSpell
@@ -912,6 +920,18 @@
 ;;; ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
+
+;;; SQL
+(eval-after-load "sql"
+  (load-library "sql-indent"))
+
+
+;;; http://www.emacswiki.org/emacs/SmoothScrolling
+;;; scroll one line at a time (less "jumpy" than defaults)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
 
 (provide 'init-common)
 
