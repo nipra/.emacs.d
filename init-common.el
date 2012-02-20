@@ -16,9 +16,30 @@
                                 "/home/nipra/.emacs.d/php/php-mode-1.5.0"
                                 "/home/nipra/.emacs.d/oz"
                                 "/home/nipra/.emacs.d/hs"
-                                "/home/nipra/.emacs.d/hs/haskellmode-emacs"))
+                                "/home/nipra/.emacs.d/hs/haskellmode-emacs"
+
+                                ;; Compile cedet
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/eieio"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/common"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/semantic"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/speedbar"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/eieio"
+                                
+                                ;; Compile cedet
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/cogre"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/contrib"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/ede"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/eieio"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/common"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/semantic"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/speedbar"
+                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/srecode"
+                                ))
 
 (setq load-path (append additional-paths-common load-path))
+
+;; (require 'cedet-load)
+
 
 ;; -----------------------------
 ;; General Display Customisation
@@ -908,6 +929,9 @@
 
 ;;; PHP
 (require 'php-mode)
+
+;;; Java
+;; (require 'config-java)
 
 ;;; YAML
 (require 'yaml-mode)
