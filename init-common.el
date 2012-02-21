@@ -20,8 +20,8 @@
 
                                 ;; Compile cedet
                                 ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/eieio"
-                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/common"
-                                ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/semantic"
+                                "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/common"
+                                "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/semantic"
                                 ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/speedbar"
                                 ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/eieio"
                                 
@@ -38,7 +38,7 @@
 
 (setq load-path (append additional-paths-common load-path))
 
-;; (require 'cedet-load)
+;; (require 'cedet)
 
 
 ;; -----------------------------
@@ -931,7 +931,48 @@
 (require 'php-mode)
 
 ;;; Java
-;; (require 'config-java)
+;;; http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs
+(setq auto-mode-alist
+      (append
+       '(("\\.java$" . java-mode))
+       auto-mode-alist))
+
+(setq c-auto-newline nil)
+(setq c-brace-offset -2)
+(setq c-continued-statement-offset 2)
+(setq c-indent-level 2)
+(setq c-tab-always-indent t)
+(setq c-indent-comments-syntactically-p nil)
+
+
+(defun my-c-mode-common-hook ()
+  ;; use Ellemtel style for all C, C++, and Objective-C code
+  (c-set-style "ellemtel")
+  (c-set-offset 'inclass '+)
+  (c-set-offset 'case-label 0)
+  (c-set-offset 'statement-case-intro '+)
+  (c-set-offset 'inline-open '0)
+  (c-set-offset 'substatement '+)
+  (c-set-offset 'comment-intro '0)
+  
+  (abbrev-mode 1)
+  (setq dabbrev-case-replace nil)
+
+  (setq c-tab-always-indent t
+        c-basic-offset 2
+        tab-width 2
+        indent-tabs-mode nil
+        c-double-slash-is-comments-p t
+        )
+
+  (imenu-add-to-menubar "Functions")
+  (which-function-mode 1)
+  (auto-revert-mode 1)
+
+  )
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+(require 'config-java)
 
 ;;; YAML
 (require 'yaml-mode)
