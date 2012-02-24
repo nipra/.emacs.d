@@ -17,6 +17,7 @@
                                 "/home/nipra/.emacs.d/oz"
                                 "/home/nipra/.emacs.d/hs"
                                 "/home/nipra/.emacs.d/hs/haskellmode-emacs"
+                                "/home/nipra/.emacs.d/scala"
 
                                 ;; Compile cedet
                                 ;; "/home/nipra/.emacs.d/cedet/cedet-1.0beta3b/eieio"
@@ -974,6 +975,10 @@
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 (require 'config-java)
 
+
+;; Scala
+(require 'config-scala)
+
 ;;; YAML
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
@@ -997,6 +1002,48 @@
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
+
+;; http://www.emacswiki.org/emacs/TransparentEmacs
+;;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
+(set-frame-parameter (selected-frame) 'alpha '(85 50))
+(add-to-list 'default-frame-alist '(alpha 85 50))
+
+;; You can use the following snippet after you’ve set the alpha as above to assign a toggle to “C-c t”:
+
+(eval-when-compile (require 'cl))
+(defun toggle-transparency ()
+  (interactive)
+  (if (/=
+       (cadr (frame-parameter nil 'alpha))
+       100)
+      (set-frame-parameter nil 'alpha '(100 100))
+    (set-frame-parameter nil 'alpha '(85 50))))
+(global-set-key (kbd "C-c t") 'toggle-transparency)
+
+;; A general transparency function:
+;; Set transparency of emacs
+(defun transparency (value)
+  "Sets the transparency of the frame window. 0=transparent/100=opaque"
+  (interactive "nTransparency Value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))
+
+;; http://emacs-fu.blogspot.in/2009/02/transparent-emacs.html
+(defun djcb-opacity-modify (&optional dec)
+  "modify the transparency of the emacs frame; if DEC is t,
+    decrease the transparency, otherwise increase it in 10%-steps"
+  (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
+         (oldalpha (if alpha-or-nil alpha-or-nil 100))
+         (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
+    (when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
+      (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
+
+;; C-8 will increase opacity (== decrease transparency)
+;; C-9 will decrease opacity (== increase transparency
+;; C-0 will returns the state to normal
+(global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify)))
+(global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify t)))
+(global-set-key (kbd "C-0") '(lambda()(interactive)
+                               (modify-frame-parameters nil `((alpha . 100)))))
 
 (provide 'init-common)
 

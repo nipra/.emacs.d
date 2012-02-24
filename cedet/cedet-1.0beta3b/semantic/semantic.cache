@@ -1,0 +1,15 @@
+;; Object semantic/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semantic/"
+  :tables (list 
+   (semanticdb-table "semantic-load.el"
+    :major-mode 'emacs-lisp-mode
+    :tags '(("semantic-fw" include nil nil [1047 1069]) ("let" code nil nil [1109 1367]) ("eval-after-load" code nil nil [1399 1497]) ("semantic-load-imenu-string" variable (:default-value "TAGS") nil [1531 1641]) ("semantic-load-turn-everything-on" variable nil nil [1643 1752]) ("semantic-load-turn-useful-things-on" variable nil nil [1754 1933]) ("semantic-load-enable-minimum-features" function (:user-visible-flag t) nil [1935 2694]) ("semantic-load-enable-code-helpers" function (:user-visible-flag t) nil [2696 4142]) ("semantic-load-enable-excessive-code-helpers" function (:user-visible-flag t) nil [4144 4623]) ("semantic-load-enable-semantic-debugging-helpers" function (:user-visible-flag t) nil [4625 5411]) ("cond" code nil nil [5436 5654]) ("semantic-load" package nil nil [5656 5680]))
+    :file "semantic-load.el"
+    :pointmax 5713
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0beta3"
+  :semanticdb-version "2.0beta3"
+  )
