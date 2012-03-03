@@ -3,3 +3,4 @@ history
 session.*
 tramp
 *.*~
+*.elc

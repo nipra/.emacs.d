@@ -58,7 +58,7 @@
 (setq blink-matching-paren t)
 (setq blink-matching-delay .25)
 (setq size-indication-mode t)
-(global-font-lock-mode 1 t)
+(global-font-lock-mode 1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (tooltip-mode -1)
@@ -916,7 +916,7 @@
 
 ;; (require 'python-mode-config)
 
-(require 'config-erl)
+;; (require 'config-erl)
 (require 'config-oz)
 
 ;;; JavaScript
