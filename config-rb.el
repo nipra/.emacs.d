@@ -1,4 +1,10 @@
+;; http://rinari.rubyforge.org/Basic-Setup.html#Basic-Setup
+;; git clone git://github.com/eschulte/rinari.git
+;;      cd rinari
+;;      git submodule init
+;;      git submodule update
 (setq additional-paths-rb '("/home/nipra/.emacs.d"
+                            "/home/nipra/.emacs.d/rb"
                             "/home/nipra/.emacs.d/rb/rinari"
                             "/home/nipra/.emacs.d/rb/rhtml"
                             "/home/nipra/.emacs.d/rb/emacs-rails-reloaded"))
