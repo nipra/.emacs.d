@@ -1,7 +1,6 @@
-(setq additional-paths-cl '("/home/nipra/.emacs.d"
-			    "/home/nipra/.emacs.d/cl/slime"
-			    "/home/nipra/.emacs.d/cl/slime/contrib"
-			    "/home/nipra/.emacs.d/cl/cl-lookup"))
+(setq additional-paths-cl '("/home/nipra/.emacs.d/slime"
+                            "/home/nipra/.emacs.d/slime/contrib"
+                            "/home/nipra/.emacs.d/cl-lookup"))
 
 (setq load-path (append additional-paths-cl load-path))
 

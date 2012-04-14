@@ -16,6 +16,10 @@
 ;;   (add-hook 'slime-load-hook (lambda () (require 'slime-autodoc)))
 ;;
 
+(eval-and-compile
+  (assert (not (featurep 'xemacs)) ()
+	  "slime-autodoc doesn't work with XEmacs"))
+
 (require 'slime-parse)
 (require 'slime-enclosing-context)
 
@@ -37,12 +41,10 @@
 (defun slime-arglist (name)
   "Show the argument list for NAME."
   (interactive (list (slime-read-symbol-name "Arglist of: ")))
-  (slime-eval-async 
-   `(swank:arglist-for-echo-area (quote (,name)))
-   (lambda (arglist)
-     (if arglist
-         (message "%s" (slime-fontify-string arglist))
-       (error "Arglist not available")))))
+  (let ((arglist (slime-eval `(swank:arglist-for-echo-area '((,name))))))
+    (if arglist
+        (message "%s" (slime-fontify-string arglist))
+        (error "Arglist not available"))))
 
 
 ;;;; Autodocs (automatic context-sensitive help)
@@ -181,9 +183,10 @@ Return DOCUMENTATION."
   (with-current-buffer (get-buffer-create " *slime-fontify*")
     (erase-buffer)
     (unless (eq major-mode 'lisp-mode)
-      (lisp-mode)
-      (slime-autodoc-mode -1)
-      (set (make-local-variable 'slime-highlight-suppressed-forms) nil))
+      ;; Just calling (lisp-mode) will turn slime-mode on in that buffer,
+      ;; which may interfere with this function
+      (setq major-mode 'lisp-mode)
+      (lisp-mode-variables t))
     (insert string)
     (let ((font-lock-verbose nil))
       (font-lock-fontify-buffer))
@@ -231,7 +234,6 @@ If it's not in the cache, the cache will be updated asynchronously."
     (save-match-data
       (slime-compute-autodoc-internal))))
 
-
 (make-variable-buffer-local (defvar slime-autodoc-mode nil))
 
 (defun slime-autodoc-mode (&optional arg)
@@ -240,14 +242,14 @@ If it's not in the cache, the cache will be updated asynchronously."
   (make-local-variable 'eldoc-idle-delay)
   (setq eldoc-documentation-function 'slime-compute-autodoc)
   (setq eldoc-idle-delay slime-autodoc-delay)
-  (if (eldoc-mode arg)
-      (progn 
-        (setq slime-echo-arglist-function 
-              #'(lambda () (eldoc-message (slime-compute-autodoc))))
-        (setq slime-autodoc-mode t))
-      (progn 
-        (setq slime-echo-arglist-function 'slime-show-arglist)
-        (setq slime-autodoc-mode nil))))
+  (eldoc-mode arg)
+  (cond (eldoc-mode
+	 (setq slime-echo-arglist-function 
+	       (lambda () (eldoc-message (slime-compute-autodoc))))
+	 (setq slime-autodoc-mode t))
+	(t
+	 (setq slime-echo-arglist-function 'slime-show-arglist)
+	 (setq slime-autodoc-mode nil))))
 
 (defadvice eldoc-display-message-no-interference-p 
     (after slime-autodoc-message-ok-p)
