@@ -229,6 +229,7 @@
 (require 'w3m-load)
 (require 'w3m)
 (setq w3m-use-cookies t)
+(setq w3m-default-display-inline-images t)
 
 (defun w3m-new-tab ()
   (interactive)

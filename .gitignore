@@ -4,3 +4,4 @@ session.*
 tramp
 *.*~
 *.elc
+ac-comphist.dat
