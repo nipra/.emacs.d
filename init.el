@@ -4,6 +4,7 @@
                                 "/home/nipra/.emacs.d/twittering-mode-new"
                                 "/home/nipra/.emacs.d/emms-3.0"
                                 "/home/nipra/.emacs.d/color-themes"
+                                "/home/nipra/.emacs.d/R/ess-12.04-2/lisp"
                                 ;; "/home/nipra/.emacs.d/py"
                                 ;; "/home/nipra/.emacs.d/py-new"
                                 ;; "/home/nipra/.emacs.d/py-vedang"
@@ -1190,6 +1191,9 @@
 (global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify t)))
 (global-set-key (kbd "C-0") '(lambda()(interactive)
                                (modify-frame-parameters nil `((alpha . 100)))))
+
+;; R
+(require 'ess-site)
 
 (require 'config-clj)
 ;; (require 'config-cl)
