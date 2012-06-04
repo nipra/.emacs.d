@@ -7,6 +7,8 @@
 ;;
 (require 'cl-lookup)
 
+(require 'hyperspec)
+
 ;; PAREDIT-MODE
 (require 'paredit)
 (autoload 'paredit-mode "paredit"
@@ -44,10 +46,14 @@
 
 (setq common-lisp-hyperspec-root
       ;; "http://www.lispworks.com/reference/HyperSpec/"
-      "file:///home/nipra/Documents/Lisp/HyperSpec/")
+      ;; "file:///home/nipra/Documents/Lisp/HyperSpec/"
+      "file:///home/nipra/Dropbox/Personal/Documents/Common Lisp/HyperSpec/HyperSpec/"
+      )
 
-;; (setq common-lisp-hyperspec-symbol-table
-;;       "/home/nipra/Documents/Lisp/HyperSpec/Data/Map_Sym.txt")
+(setq common-lisp-hyperspec-symbol-table
+      ;; "/home/nipra/Documents/Lisp/HyperSpec/Data/Map_Sym.txt"
+      "/home/nipra/Dropbox/Personal/Documents/Common Lisp/HyperSpec/HyperSpec/Data/Map_Sym.txt"
+      )
 
 (defslime-start cmucl "/usr/bin/cmucl")
 (defslime-start sbcl-local "/usr/local/bin/sbcl")
