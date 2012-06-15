@@ -9,9 +9,11 @@
 
 ;; Slime
 ;; http://dev.clojure.org/display/doc/Getting+Started+with+Emacs
-;; (require 'slime)
-;; ;; (eval-after-load 'slime '(setq slime-protocol-version 'ignore))
-;; (slime-setup '(slime-repl))
+(require 'slime)
+;; (eval-after-load 'slime '(setq slime-protocol-version 'ignore))
+(slime-setup '(slime-repl
+               ;; slime-fancy
+               slime-fuzzy))
 
 
 ;; Clojure
@@ -22,12 +24,12 @@
 (require 'clojure-test-mode) 
 (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 
-(require 'slime)
+;; (require 'slime)
 ;; (require 'slime-autoloads)
-(slime-setup '(slime-fancy
-               slime-repl
-               slime-asdf
-               slime-fuzzy))
+;; (slime-setup '(slime-fancy
+;;                slime-repl
+;;                slime-asdf
+;;                slime-fuzzy))
 (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 (add-hook 'inferior-lisp-mode-hook (lambda () (slime-mode t)))
 ;; (require 'paredit)
