@@ -1,9 +1,9 @@
 ;; Clojure
-(setq additional-paths-clj '("/home/nipra/.emacs.d/slime.technomancy.git"
-                             "/home/nipra/.emacs.d/slime.technomancy.git/contrib"
+(setq additional-paths-clj (list (concat nipra-home "/.emacs.d/slime.technomancy.git")
+                                 (concat nipra-home "/.emacs.d/slime.technomancy.git/contrib")
 
-                             "/home/nipra/.emacs.d/clojure-mode-1.8.0"
-                             ))
+                                 (concat nipra-home "/.emacs.d/clojure-mode-1.8.0")
+                                 ))
 
 (setq load-path (append additional-paths-clj load-path))
 
