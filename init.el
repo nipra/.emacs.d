@@ -1,10 +1,14 @@
+(setq mac? (eq system-type 'darwin))
 (setq nipra-home (getenv "HOME"))
 (setq additional-paths-common (list (concat nipra-home "/.emacs.d")
                                     (concat nipra-home "/.emacs.d/magit")
-                                    (concat nipra-home "/.emacs.d/emacs-w3m")
+                                    ;; (concat nipra-home "/.emacs.d/emacs-w3m")
+                                    ;; "/usr/share/emacs/site-lisp/w3m"
+                                    (concat nipra-home "/.emacs.d/emacs-w3m-cvs")
                                     (concat nipra-home "/.emacs.d/twittering-mode-new")
                                     (concat nipra-home "/.emacs.d/emms-3.0")
                                     (concat nipra-home "/.emacs.d/color-themes")
+                                    "/opt/local/share/emacs/site-lisp/color-theme-6.6.0"
                                     (concat nipra-home "/.emacs.d/R/ess-12.04-2/lisp")
                                     ;; "/home/nipra/.emacs.d/py"
                                     ;; "/home/nipra/.emacs.d/py-new"
@@ -43,7 +47,7 @@
 
 ;; (require 'cedet)
 
-(when (eq system-type 'darwin) ;; mac specific settings
+(when mac? ;; mac specific settings
   (setq mac-option-modifier 'alt)
   (setq mac-command-modifier 'meta)
   ;; (global-set-key [kp-delete] 'delete-char)
@@ -80,7 +84,9 @@
 (setq query-replace-highlight t)
 (setq search-highlight t)
 (setq mouse-avoidance-mode 'banish)
-(set-frame-font "DejaVu Sans Mono-10")
+(if mac?
+    (set-frame-font "DejaVu Sans Mono-14")
+  (set-frame-font "DejaVu Sans Mono-10"))
 
 
 ;; X11 Copy & Paste to/from Emacs
@@ -235,68 +241,70 @@
 
 
 ;; Use w3m for web browsing.  (Mostly for SLIME Hyperspec lookups.)
-(require 'w3m-load)
-(require 'w3m)
-(setq w3m-use-cookies t)
-(setq w3m-default-display-inline-images t)
+(when (not mac?)
+  (require 'w3m-load)
+  (require 'w3m)
+  (setq w3m-use-cookies t)
+  (setq w3m-default-display-inline-images t)
 
-(defun w3m-new-tab ()
-  (interactive)
-  (w3m-copy-buffer nil nil nil t))
+  (defun w3m-new-tab ()
+    (interactive)
+    (w3m-copy-buffer nil nil nil t))
 
-(defun w3m-browse-url-new-tab (url &optional new-session)
-  (interactive)
-  (unless (eql major-mode 'w3m-mode)
-    (if (> (length (window-list)) 2)
-        (other-window 0)
-      (if (= (length (window-list)) 1)
-          (progn (split-window-vertically)
-                 (other-window 1))
-        (other-window 1))))
-  (w3m-new-tab)
-  (w3m-browse-url url))
+  (defun w3m-browse-url-new-tab (url &optional new-session)
+    (interactive)
+    (unless (eql major-mode 'w3m-mode)
+      (if (> (length (window-list)) 2)
+          (other-window 0)
+        (if (= (length (window-list)) 1)
+            (progn (split-window-vertically)
+                   (other-window 1))
+          (other-window 1))))
+    (w3m-new-tab)
+    (w3m-browse-url url))
 
-(setq browse-url-browser-function 'w3m-browse-url-new-tab)
+  (setq browse-url-browser-function 'w3m-browse-url-new-tab)
 
-;; w3m mode key bindings
-(define-key w3m-mode-map (kbd "t")         'w3m-goto-url-new-session)
-(define-key w3m-mode-map (kbd "u")         'w3m-view-this-url-new-session)
-(define-key w3m-mode-map (kbd "c")         'w3m-delete-buffer)
-(define-key w3m-mode-map (kbd "M-c")       'w3m-delete-other-buffers)
-(define-key w3m-mode-map (kbd "n")         'w3m-next-buffer)
-(define-key w3m-mode-map (kbd "p")         'w3m-previous-buffer)
-(define-key w3m-mode-map (kbd "M-l")       'w3m-delete-left-tabs)
-(define-key w3m-mode-map (kbd "M-r")       'w3m-delete-right-tabs)
-(define-key w3m-mode-map (kbd "C-c C-d h") 'cl-lookup)
-(define-key w3m-mode-map (kbd "C-c C-f")   'w3m-find-file)
-;; (define-key w3m-mode-map (kbd "b")   'w3m-bookmark-add-current-url)
+  ;; w3m mode key bindings
+  (define-key w3m-mode-map (kbd "t")         'w3m-goto-url-new-session)
+  (define-key w3m-mode-map (kbd "u")         'w3m-view-this-url-new-session)
+  (define-key w3m-mode-map (kbd "c")         'w3m-delete-buffer)
+  (define-key w3m-mode-map (kbd "M-c")       'w3m-delete-other-buffers)
+  (define-key w3m-mode-map (kbd "n")         'w3m-next-buffer)
+  (define-key w3m-mode-map (kbd "p")         'w3m-previous-buffer)
+  (define-key w3m-mode-map (kbd "M-l")       'w3m-delete-left-tabs)
+  (define-key w3m-mode-map (kbd "M-r")       'w3m-delete-right-tabs)
+  (define-key w3m-mode-map (kbd "C-c C-d h") 'cl-lookup)
+  (define-key w3m-mode-map (kbd "C-c C-f")   'w3m-find-file)
+  ;; (define-key w3m-mode-map (kbd "b")   'w3m-bookmark-add-current-url)
 
 ;;; http://www.emacswiki.org/emacs/WThreeMHintsAndTips
 
 ;;; Browsing the current buffer
-(defun w3m-browse-current-buffer ()
-  (interactive)
-  (let ((filename (concat (make-temp-file "w3m-") ".html")))
-    (unwind-protect
-        (progn
-          (write-region (point-min) (point-max) filename)
-          (w3m-find-file filename))
-      (delete-file filename))))
+  (defun w3m-browse-current-buffer ()
+    (interactive)
+    (let ((filename (concat (make-temp-file "w3m-") ".html")))
+      (unwind-protect
+          (progn
+            (write-region (point-min) (point-max) filename)
+            (w3m-find-file filename))
+        (delete-file filename))))
 
 
 ;;; http://github.com/emacsmirror/w3m-multibookmarks
-(require 'w3m-multibookmarks)
-;; (setq w3m-multibookmarks-enable t)
+  (require 'w3m-multibookmarks)
+  ;; (setq w3m-multibookmarks-enable t)
 
 
-(setq w3m-multibookmarks-list
-      '(("b"  "~/.emacs.d/data/bookmarks.html" "Firefox")
-        ("w"  "~/.w3m/bookmark.html" "w3m")
-        ("f" "~/.mozilla/firefox/7d5an3qn.default/bookmarks.html" "FF Updated")))
+  (setq w3m-multibookmarks-list
+        '(("b"  "~/.emacs.d/data/bookmarks.html" "Firefox")
+          ("w"  "~/.w3m/bookmark.html" "w3m")
+          ("f" "~/.mozilla/firefox/7d5an3qn.default/bookmarks.html" "FF Updated")))
 
-;; (eval-after-load 'w3m-multibookmarks
-;;   '(progn 
-;;      (define-key w3m-mode-map (kbd "a")   'w3m-bookmark-add-current-url)))
+  ;; (eval-after-load 'w3m-multibookmarks
+  ;;   '(progn 
+  ;;      (define-key w3m-mode-map (kbd "a")   'w3m-bookmark-add-current-url)))
+  )
 
 ;;; anything-delicious
 (require 'anything-delicious)
@@ -953,51 +961,54 @@
 ;;; http://bc.tech.coop/blog/070528.html
 
 ;; This is needed for Erlang mode setup
-(setq erlang-root-dir "/usr/local/lib/erlang")
-(setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.6.7/emacs" load-path))
-(setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
+(when (not mac?)
+  (setq erlang-root-dir "/usr/local/lib/erlang")
+  (setq load-path (cons "/usr/local/lib/erlang/lib/tools-2.6.7/emacs" load-path))
+  (setq exec-path (cons "/usr/local/lib/erlang/bin" exec-path))
 
-;; (setq erlang-root-dir "/usr/lib/erlang")
-;; (setq load-path (cons "/usr/lib/erlang/lib/tools-2.6.5/emacs" load-path))
-;; (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
+  ;; (setq erlang-root-dir "/usr/lib/erlang")
+  ;; (setq load-path (cons "/usr/lib/erlang/lib/tools-2.6.5/emacs" load-path))
+  ;; (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
 
-(require 'erlang-start)
+  (require 'erlang-start)
 
-;; This is needed for Distel setup
-(let ((distel-dir (concat nipra-home "/.emacs.d/distel/elisp")))
-  (unless (member distel-dir load-path)
-    ;; Add distel-dir to the end of load-path
-    (setq load-path (append load-path (list distel-dir)))))
+  ;; This is needed for Distel setup
+  (let ((distel-dir (concat nipra-home "/.emacs.d/distel/elisp")))
+    (unless (member distel-dir load-path)
+      ;; Add distel-dir to the end of load-path
+      (setq load-path (append load-path (list distel-dir)))))
 
-(require 'distel)
-(distel-setup)
+  (require 'distel)
+  (distel-setup)
 
-;; Some Erlang customizations
-(add-hook 'erlang-mode-hook
-          (lambda ()
-            ;; when starting an Erlang shell in Emacs, default in the node name
-            (setq inferior-erlang-machine-options
-                  '("-sname" "emacs"
-                    "-pa" (concat nipra-home "/.emacs.d/distel/src")
-                    "-pa" (concat nipra-home "/Erlang/source")))
-            ;; add Erlang functions to an imenu menu
-            ;; (imenu-add-to-menubar "imenu")
-            ))
+  ;; Some Erlang customizations
+  (add-hook 'erlang-mode-hook
+            (lambda ()
+              ;; when starting an Erlang shell in Emacs, default in the node name
+              (setq inferior-erlang-machine-options
+                    '("-sname" "emacs"
+                      "-pa" (concat nipra-home "/.emacs.d/distel/src")
+                      "-pa" (concat nipra-home "/Erlang/source")))
+              ;; add Erlang functions to an imenu menu
+              ;; (imenu-add-to-menubar "imenu")
+              ))
 
-;; A number of the erlang-extended-mode key bindings are useful in the shell too
-(defconst distel-shell-keys
-  '(("\C-\M-i"   erl-complete)
-    ("\M-?"      erl-complete)	
-    ("\M-."      erl-find-source-under-point)
-    ("\M-,"      erl-find-source-unwind) 
-    ("\M-*"      erl-find-source-unwind))
-  "Additional keys to bind when in Erlang shell.")
+  ;; A number of the erlang-extended-mode key bindings are useful in the shell too
+  (defconst distel-shell-keys
+    '(("\C-\M-i"   erl-complete)
+      ("\M-?"      erl-complete)	
+      ("\M-."      erl-find-source-under-point)
+      ("\M-,"      erl-find-source-unwind) 
+      ("\M-*"      erl-find-source-unwind))
+    "Additional keys to bind when in Erlang shell.")
 
-(add-hook 'erlang-shell-mode-hook
-          (lambda ()
-            ;; add some Distel bindings to the Erlang shell
-            (dolist (spec distel-shell-keys)
-              (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
+  (add-hook 'erlang-shell-mode-hook
+            (lambda ()
+              ;; add some Distel bindings to the Erlang shell
+              (dolist (spec distel-shell-keys)
+                (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
+  )
+
 
 ;; Oz
 (or (getenv "OZHOME")
