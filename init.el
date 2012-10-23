@@ -134,12 +134,13 @@
 (setq-default tab-width 4
 	          indent-tabs-mode nil)
 
+;; http://www.emacswiki.org/emacs/TransparentEmacs
 (defun transparency (value)
   "Sets the transparency of the frame window. 0=transparent/100=opaque"
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
 
-(transparency 70)
+(transparency 100)
 
 ;;; anything
 (require 'anything)
