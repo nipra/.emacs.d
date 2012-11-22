@@ -2,8 +2,8 @@
 (setq additional-paths-clj '("/home/nipra/.emacs.d/slime.technomancy.git"
                              "/home/nipra/.emacs.d/slime.technomancy.git/contrib"
 
-                             "/home/nipra/.emacs.d/clojure-mode-1.8.0"
-                             ))
+                             ;; "/home/nipra/.emacs.d/clojure-mode-1.8.0"
+                             "/home/nipra/.emacs.d/clojure-mode.git"))
 
 (setq load-path (append additional-paths-clj load-path))
 
