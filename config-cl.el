@@ -1,6 +1,6 @@
-(setq additional-paths-cl '("/home/nipra/.emacs.d/slime"
-                            "/home/nipra/.emacs.d/slime/contrib"
-                            "/home/nipra/.emacs.d/cl-lookup"))
+(setq additional-paths-cl (list (concat nipra-home "/.emacs.d/slime")
+                                (concat nipra-home "/.emacs.d/slime/contrib")
+                                (concat nipra-home "/.emacs.d/cl-lookup")))
 
 (setq load-path (append additional-paths-cl load-path))
 
@@ -47,24 +47,25 @@
 (setq common-lisp-hyperspec-root
       ;; "http://www.lispworks.com/reference/HyperSpec/"
       ;; "file:///home/nipra/Documents/Lisp/HyperSpec/"
-      "file:///home/nipra/Dropbox/Personal/Documents/Common Lisp/HyperSpec/HyperSpec/"
+      ;; "file:///home/nipra/Dropbox/Personal/Documents/Common Lisp/HyperSpec/HyperSpec/"
+      (concat "file://" nipra-home "/Dropbox/Personal/Documents/Common Lisp/HyperSpec/HyperSpec/")
       )
 
 (setq common-lisp-hyperspec-symbol-table
       ;; "/home/nipra/Documents/Lisp/HyperSpec/Data/Map_Sym.txt"
-      "/home/nipra/Dropbox/Personal/Documents/Common Lisp/HyperSpec/HyperSpec/Data/Map_Sym.txt"
+      (concat nipra-home "/Dropbox/Personal/Documents/Common Lisp/HyperSpec/HyperSpec/Data/Map_Sym.txt")
       )
 
 (defslime-start cmucl "/usr/bin/cmucl")
 (defslime-start sbcl-local "/usr/local/bin/sbcl")
 (defslime-start sbcl "/usr/bin/sbcl")
-(defslime-start alisp "/home/nipra/opt/acl80/alisp")
-(defslime-start mlisp "/home/nipra/opt/acl80/mlisp")
-(defslime-start mlisp8 "/home/nipra/opt/acl80/mlisp8")
-(defslime-start alisp8 "/home/nipra/opt/acl80/alisp8")
+(defslime-start alisp (concat nipra-home "/opt/acl80/alisp"))
+(defslime-start mlisp (concat nipra-home "/opt/acl80/mlisp"))
+(defslime-start mlisp8 (concat nipra-home "/opt/acl80/mlisp8"))
+(defslime-start alisp8 (concat nipra-home "/opt/acl80/alisp8"))
 (defslime-start clisp "/usr/bin/clisp")
 (defslime-start gcl "/usr/bin/gcl")
-(defslime-start ccl "/home/nipra/Softwares/ccl/scripts/ccl")
+(defslime-start ccl (concat nipra-home "/Softwares/ccl/scripts/ccl"))
 
 (add-hook 'slime-mode-hook (lambda () (paredit-mode +1)))
 (add-hook 'lisp-mode-hook (lambda () (paredit-mode +1)))
