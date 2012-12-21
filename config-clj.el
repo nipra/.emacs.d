@@ -246,6 +246,7 @@
 ;;      (defcontract 'defun)
 ;;      (provide 'defun)))
 
+(setq slime-protocol-version 'ignore)
 
 (provide 'config-clj)
 
