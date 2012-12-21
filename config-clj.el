@@ -2,8 +2,8 @@
 (setq additional-paths-clj (list (concat nipra-home "/.emacs.d/slime.technomancy.git")
                                  (concat nipra-home "/.emacs.d/slime.technomancy.git/contrib")
 
-                             ;; "/home/nipra/.emacs.d/clojure-mode-1.8.0"
-                             "/home/nipra/.emacs.d/clojure-mode.git"))
+                                 ;; "/home/nipra/.emacs.d/clojure-mode-1.8.0"
+                                 (concat nipra-home "/.emacs.d/clojure-mode.git")))
 
 (setq load-path (append additional-paths-clj load-path))
 
@@ -249,4 +249,3 @@
 (setq slime-protocol-version 'ignore)
 
 (provide 'config-clj)
-
