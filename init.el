@@ -1224,6 +1224,7 @@
 
 (require 'config-clj)
 ;; (require 'config-cl)
+;; (require 'config-clj-new)
 
 ;; Pig
 (require 'pig-mode)
