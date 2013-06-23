@@ -41,7 +41,9 @@
                                     ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/semantic"
                                     ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/speedbar"
                                     ;; "/home/nipra/.emacs.d/cedet/cedet-1.0.1/srecode"
-                                    ))
+
+                                    (concat nipra-home "/.emacs.d/emacs-eclim")
+                                    (concat nipra-home "/.emacs.d/company-mode")))
 
 (setq load-path (append additional-paths-common load-path))
 
@@ -947,20 +949,20 @@
 
 
 ;;; 
-(add-hook 'find-file-hook 'flymake-find-file-hook)
-(when (load "flymake" t)
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-               'flymake-create-temp-inplace))
-       (local-file (file-relative-name
-            temp-file
-            (file-name-directory buffer-file-name))))
-      (list "pycheckers"  (list local-file))))
-   (add-to-list 'flymake-allowed-file-name-masks
-             '("\\.py\\'" flymake-pyflakes-init)))
-(load-library "flymake-cursor")
-(global-set-key [f10] 'flymake-goto-prev-error)
-(global-set-key [f11] 'flymake-goto-next-error)
+;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+;; (when (load "flymake" t)
+;;   (defun flymake-pyflakes-init ()
+;;     (let* ((temp-file (flymake-init-create-temp-buffer-copy
+;;                'flymake-create-temp-inplace))
+;;        (local-file (file-relative-name
+;;             temp-file
+;;             (file-name-directory buffer-file-name))))
+;;       (list "pycheckers"  (list local-file))))
+;;    (add-to-list 'flymake-allowed-file-name-masks
+;;              '("\\.py\\'" flymake-pyflakes-init)))
+;; (load-library "flymake-cursor")
+;; (global-set-key [f10] 'flymake-goto-prev-error)
+;; (global-set-key [f11] 'flymake-goto-next-error)
 
 
 ;; Erlang
@@ -1102,11 +1104,68 @@
 (require 'php-mode)
 
 ;;; Java
+
+;; http://www.emacswiki.org/emacs/java-mode-indent-annotations.el
+;; (require 'java-mode-indent-annotations)
+
 ;;; http://www.emacswiki.org/emacs/JonathanArnoldDotEmacs
 (setq auto-mode-alist
       (append
        '(("\\.java$" . java-mode))
        auto-mode-alist))
+
+;; http://www.emacswiki.org/emacs/IndentingJava
+(add-hook 'java-mode-hook (lambda ()
+                            (setq c-basic-offset 4
+                                  tab-width 4
+                                  indent-tabs-mode t)))
+
+;; http://www.emacswiki.org/emacs/IndentingJava
+(add-hook 'java-mode-hook
+          (lambda ()
+            "Treat Java 1.5 @-style annotations as comments."
+            (setq c-comment-start-regexp "(@|/(/|[*][*]?))")
+            (modify-syntax-entry ?@ "< b" java-mode-syntax-table)))
+
+;; <<START>>
+
+;; https://github.com/senny/emacs-eclim
+;; This project brings some of the great eclipse features to emacs
+;; developers. It is based on the eclim project, which provides
+;; eclipse features for vim.
+
+(require 'eclim)
+(global-eclim-mode)
+
+(custom-set-variables
+ '(eclim-eclipse-dirs (list (concat nipra-home "/Downloads/eclipse"))))
+
+;;
+(setq eclim-executable (concat nipra-home "/Downloads/eclipse/eclim"))
+(setq eclimd-executable nil)
+(setq eclim-auto-save nil)              ; Turn off auto save
+
+;; Displaying compilation error messages in the echo area
+(setq help-at-pt-display-when-idle t)
+(setq help-at-pt-timer-delay 0.1)
+(help-at-pt-set-timer)
+
+;; add the emacs-eclim source
+(require 'ac-emacs-eclim-source)
+(ac-emacs-eclim-config)
+
+;; Emacs-eclim can integrate with company-mode to provide pop-up
+;; dialogs for auto-completion.
+(require 'company)
+(require 'company-emacs-eclim)
+(company-emacs-eclim-setup)
+(global-company-mode t)
+
+;; Keymap
+;; C-c C-e m r => eclim-maven-run (Goal: install)
+(define-key eclim-mode-map (kbd "C-c C-e r") 'eclim-run-class)
+
+;; <<END>>
 
 (setq c-auto-newline nil)
 (setq c-brace-offset -2)
@@ -1143,6 +1202,9 @@
   )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+;; http://www.emacswiki.org/emacs/IndentingJava
+;; (add-hook 'java-mode-hook 'java-mode-indent-annotations-setup)
 
 ;; Scala
 ;; (setq additional-paths-scala '("/home/nipra/.emacs.d/scala"
